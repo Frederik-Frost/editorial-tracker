@@ -45,3 +45,18 @@ export let contentItems: ContentItem[] = [
 export const addContentItem = (item: ContentItem) => {
   contentItems = [item, ...contentItems];
 };
+
+export const findContentItem = (id: string) =>
+  contentItems.find((item) => item.id === id);
+
+export const replaceContentItem = (updatedItem: ContentItem) => {
+  contentItems = contentItems.map((item) =>
+    item.id === updatedItem.id ? updatedItem : item,
+  );
+};
+
+export const removeContentItem = (id: string) => {
+  const existingCount = contentItems.length;
+  contentItems = contentItems.filter((item) => item.id !== id);
+  return contentItems.length < existingCount;
+};
