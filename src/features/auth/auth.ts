@@ -9,6 +9,5 @@ export type UserWithCredentials = User & {
   password: string;
 };
 
-export function toUser({ password: _password, ...user }: UserWithCredentials) {
-  return user;
-}
+export const toUser = ({ password: _password, ...user }: UserWithCredentials) =>
+  user;

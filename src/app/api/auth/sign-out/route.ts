@@ -5,10 +5,10 @@ type SignOutResponse = {
   signedOut: true;
 };
 
-export async function POST(): Promise<NextResponse<SignOutResponse>> {
+export const POST = async (): Promise<NextResponse<SignOutResponse>> => {
   const response = NextResponse.json<SignOutResponse>({ signedOut: true });
 
   clearAuthCookie(response);
 
   return response;
-}
+};

@@ -11,9 +11,9 @@ type SignInRequest = {
 
 type SignInResponse = { user: User } | { error: string };
 
-export async function POST(
+export const POST = async (
   request: NextRequest,
-): Promise<NextResponse<SignInResponse>> {
+): Promise<NextResponse<SignInResponse>> => {
   try {
     const body = (await request.json()) as SignInRequest;
     // TODO: add zod for request validation
@@ -53,4 +53,4 @@ export async function POST(
       { status: 500 },
     );
   }
-}
+};
