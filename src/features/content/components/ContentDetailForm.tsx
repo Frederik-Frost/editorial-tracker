@@ -143,8 +143,7 @@ export const ContentDetailForm = ({ item }: ContentDetailFormProps) => {
 
 			<div className="flex flex-wrap justify-between gap-3 border-t border-border pt-5">
 				<Button
-					className="text-red-700 hover:text-red-900"
-					variant="tertiary"
+					variant="destructive"
 					type="button"
 					disabled={deleteContentMutation.isPending}
 					onClick={deleteItem}

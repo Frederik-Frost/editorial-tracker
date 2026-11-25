@@ -6,13 +6,13 @@ export const users: UserWithCredentials[] = [
     name: "Anja Andersen",
     role: "Editor",
     email: "editor@frihedsbrevet.dk",
-    password: "Cedar!Orbit7-Fable",
+    password: "editor",
   },
   {
     id: "contributor-1",
     name: "Anders Andersen",
     role: "Contributor",
     email: "contributor@frihedsbrevet.dk",
-    password: "Velvet#Harbor42-Mint",
+    password: "contributor",
   },
 ];
