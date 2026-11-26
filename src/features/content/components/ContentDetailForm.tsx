@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { Select } from "@/components/Select";
+import { useUser } from "@/features/auth/components/UserProvider";
 import { AuthorLabels } from "@/features/content/components/AuthorLabels";
 import {
 	type ContentItem,
@@ -20,6 +21,7 @@ type ContentDetailFormProps = {
 
 export const ContentDetailForm = ({ item }: ContentDetailFormProps) => {
 	const router = useRouter();
+	const user = useUser();
 	const { updateContentMutation, deleteContentMutation } = useContent();
 	const [title, setTitle] = useState(item.title);
 	const [status, setStatus] = useState<ContentStatus>(item.status);
@@ -37,10 +39,23 @@ export const ContentDetailForm = ({ item }: ContentDetailFormProps) => {
 	);
 
 	const saveChanges = () => {
-		updateContentMutation.mutate({
-			id: item.id,
-			content: { title, status, type, deadline, authors: authorIds },
-		});
+		updateContentMutation.mutate(
+			{
+				id: item.id,
+				content: { title, status, type, deadline, authors: authorIds },
+			},
+			{
+				onSuccess: (updatedItem) => {
+					// Redirect contributors after they remove their own access to this item.
+					if (
+						user.role === "Contributor" &&
+						!updatedItem.authors.some((author) => author.id === user.id)
+					) {
+						router.replace("/");
+					}
+				},
+			},
+		);
 	};
 
 	const deleteItem = () => {
