@@ -28,7 +28,16 @@ src/
 
 ## Run locally
 
-Requires Node.js and pnpm.
+Requires Node.js 20.9.0 or newer and pnpm 10.20.0.
+
+Enable pnpm through Corepack (included with most supported Node.js releases):
+
+```sh
+corepack enable pnpm
+corepack prepare pnpm@10.20.0 --activate
+```
+
+If `corepack` is not available, install it with `npm install --global corepack`, then run the commands above.
 
 ```sh
 pnpm install
