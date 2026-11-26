@@ -6,18 +6,10 @@ An editorial workflow demo built with Next.js, React, Tailwind CSS, and TanStack
 
 - Mock sign-in for Editors and Contributors, with an HTTP-only auth cookie.
 - Role-based content visibility: Editors see all items; Contributors see items they author.
-- Create content, filter by status, and view details.
+- Create content, filter by status, and view content list.
 - Edit content details and authors, update status, or delete an item.
 - Shared authenticated layout with dashboard header.
 
-```mermaid
-flowchart LR
-	Login[Login] --> Auth[Mock auth API and cookie]
-	Auth --> Dashboard[Authenticated dashboard]
-	Dashboard --> Content[Content API and in-memory mock data]
-	Content --> List[Filter and browse]
-	List --> Detail[Edit details, authors, or status; delete]
-```
 
 ## Project structure
 
