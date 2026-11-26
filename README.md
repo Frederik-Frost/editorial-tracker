@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Editorial Tracker
 
-## Getting Started
+An editorial workflow demo built with Next.js, React, Tailwind CSS, and TanStack Query.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Mock sign-in for Editors and Contributors, with an HTTP-only auth cookie.
+- Role-based content visibility: Editors see all items; Contributors see items they author.
+- Create content, filter by status, and view details.
+- Edit content details and authors, update status, or delete an item.
+- Shared authenticated layout with dashboard header.
+
+```mermaid
+flowchart LR
+	Login[Login] --> Auth[Mock auth API and cookie]
+	Auth --> Dashboard[Authenticated dashboard]
+	Dashboard --> Content[Content API and in-memory mock data]
+	Content --> List[Filter and browse]
+	List --> Detail[Edit details, authors, or status; delete]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+src/
+├── app/                 # Next.js routes, layouts, and API route handlers
+│   ├── (authenticated)/ # Shared auth gate and dashboard/content pages
+│   ├── api/             # Auth and content endpoints
+│   └── login/           # Login page
+├── components/          # Shared UI components and query provider
+└── features/
+		├── auth/            # Mock users, cookie helpers, user context
+		├── content/         # Content model, mock data, API helpers, hooks, UI
+		└── dashboard/       # Dashboard and shared header
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Run locally
 
-## Learn More
+Requires Node.js and pnpm.
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+pnpm install
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
+Also available at [https://editorial-tracker-iota.vercel.app/](https://editorial-tracker-iota.vercel.app/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Demo login
 
-## Deploy on Vercel
+| Role | Email | Password |
+| --- | --- | --- |
+| Editor | editor@frihedsbrevet.dk | editor |
+| Contributor | contributor@frihedsbrevet.dk | contributor |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Storage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Content items and mock users are stored in memory; content changes reset when the server process restarts.
