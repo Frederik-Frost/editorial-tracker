@@ -5,6 +5,10 @@ import { QueryProvider } from "@/components/QueryProvider";
 export const metadata: Metadata = {
   title: "Frihedsbrevet — Editorial Tracker",
   description: "Internal editorial workflow tracker",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const RootLayout = ({ children }: LayoutProps<"/">) => {
